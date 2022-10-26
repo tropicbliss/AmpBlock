@@ -3,7 +3,6 @@ import helpers.static as static
 from helpers.model import UrlMeta, CanonicalType, Canonical, Page
 import validators
 from validators import ValidationFailure
-from helpers.helper import check_if_amp
 import tldextract
 from bs4 import BeautifulSoup
 from typing import Optional, Dict, List
@@ -20,6 +19,7 @@ async def get_url_info(url, use_gac, max_depth) -> Link:
     link = Link(canonicals=[])
     origin = UrlMeta(url=remove_markdown(url))
     origin.is_valid = check_if_valid_url(origin.url)
+    from helpers.helper import check_if_amp
     origin.is_amp = check_if_amp(origin.url) and not any(
         map(origin.url.__contains__, static.DENYLISTED_DOMAINS))
     if origin.is_valid:
