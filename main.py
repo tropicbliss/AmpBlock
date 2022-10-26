@@ -9,7 +9,7 @@ class Msg(BaseModel):
 
 
 @app.get("/")
-async def hello(inp: Msg):
+async def hello():
     return {"message": "bonjour!"}
 
 
