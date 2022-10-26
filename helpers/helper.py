@@ -18,7 +18,7 @@ def check_if_amp(body: str) -> bool:
 
 
 # Get all the URLs from the body
-def get_urls(body) -> List[str]:
+def get_urls(body: str) -> List[str]:
     # Set up an extractor to extract the URLs
     extractor = URLExtract()
     # Update the TLD list if it is older than x days
@@ -29,5 +29,5 @@ def get_urls(body) -> List[str]:
 
 
 # Loop through all the URLs, run get_url_info for each url, append Link instance to links
-async def get_urls_info(urls, use_gac=False, max_depth=static.MAX_DEPTH) -> List[Link]:
-    return await asyncio.gather(*[get_url_info(url, use_gac, max_depth) for url in urls])
+async def get_urls_info(urls: List[str]) -> List[Link]:
+    return await asyncio.gather(*[get_url_info(url, False, static.MAX_DEPTH) for url in urls])
