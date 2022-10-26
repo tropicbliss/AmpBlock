@@ -14,7 +14,7 @@ app = FastAPI(
     version="0.0.1",
     contact={
         "name": "tropicbliss",
-        "url": "tropicbliss.net",
+        "url": "https://www.tropicbliss.net/",
         "email": "tropicbliss@protonmail.com"
     },
     license_info={
