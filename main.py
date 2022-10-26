@@ -2,7 +2,26 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import helpers.helper as helper
 
-app = FastAPI()
+description = """
+AmpBlock is an API that extracts AMP links from messages and retrieves each of their canonical URLs.
+
+Simply send a POST request to the root of this API and it will either return `null` if there are no AMP links detected or info regarding the extracted links (it mirrors the output of the official API). You'll have to try it out and see for yourselves.
+"""
+
+app = FastAPI(
+    title="AmpBlock",
+    description=description,
+    version="0.0.1",
+    contact={
+        "name": "tropicbliss",
+        "url": "tropicbliss.net",
+        "email": "tropicbliss@protonmail.com"
+    },
+    license_info={
+        "name": "GNU GPL v3.0",
+        "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
+    }
+)
 
 
 class Msg(BaseModel):
