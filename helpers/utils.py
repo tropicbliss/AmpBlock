@@ -5,10 +5,8 @@ import validators
 from validators import ValidationFailure
 from helper import check_if_amp
 import tldextract
-import requests
 from bs4 import BeautifulSoup
 from typing import Optional, Dict, List
-from requests import Timeout
 from random import choice
 from urllib.parse import urlparse
 import re
@@ -147,7 +145,7 @@ async def get_page(url) -> Optional[Page]:
                 page = Page(str(response.url), response.status, title, soup)
                 return page
     # If the submitted page couldn't be fetched, throw an exception
-    except (ConnectionError, Timeout, AttributeError, Exception):
+    except:
         return None
 
 
