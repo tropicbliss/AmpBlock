@@ -1,9 +1,9 @@
-from model import Link
-import static
-from model import UrlMeta, CanonicalType, Canonical, Page
+from helpers.model import Link
+import helpers.static as static
+from helpers.model import UrlMeta, CanonicalType, Canonical, Page
 import validators
 from validators import ValidationFailure
-from helper import check_if_amp
+from helpers.helper import check_if_amp
 import tldextract
 from bs4 import BeautifulSoup
 from typing import Optional, Dict, List

@@ -1,8 +1,8 @@
-import static
+import helpers.static as static
 from typing import List
 from urlextract import URLExtract
-from model import Link
-from utils import get_url_info
+from helpers.model import Link
+from helpers.utils import get_url_info
 
 
 # Check if the body contains an AMP link
