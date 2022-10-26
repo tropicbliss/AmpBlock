@@ -3,6 +3,7 @@ from typing import List
 from urlextract import URLExtract
 from helpers.model import Link
 from helpers.utils import get_url_info
+import asyncio
 
 
 # Check if the body contains an AMP link
@@ -29,9 +30,4 @@ def get_urls(body) -> List[str]:
 
 # Loop through all the URLs, run get_url_info for each url, append Link instance to links
 async def get_urls_info(urls, use_gac=False, max_depth=static.MAX_DEPTH) -> List[Link]:
-    links = []
-    for url in urls:
-        link = await get_url_info(url, use_gac, max_depth)
-        links.append(link)
-    # Return the links
-    return links
+    return await asyncio.gather(*[get_url_info(url, use_gac, max_depth) for url in urls])
