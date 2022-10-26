@@ -1,14 +1,20 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import List
+import helpers.helper as helper
 
 app = FastAPI()
 
 
 class Msg(BaseModel):
-    msg: List[str]
+    msg: str
 
 
 @app.post("/")
 async def root(inp: Msg):
-    return {"message": inp.msg[0]}
+    body = inp.msg
+    if helper.check_if_amp(body):
+        urls = helper.get_urls(body)
+        links = await helper.get_urls_info(urls)
+        if any(link.canonical for link in links) or any(link.amp_canonical for link in links):
+            return [link.__dict__ for link in links]
+    return None
