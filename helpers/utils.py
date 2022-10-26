@@ -232,6 +232,7 @@ async def get_canonical_with_soup(r, url, meta: Canonical, original_url,
                     meta.url_similarity = SequenceMatcher(
                         None, meta.url, original_url).ratio()
                     meta.domain = tldextract.extract(meta.url).domain
+                    from helpers.helper import check_if_amp
                     meta.is_amp = check_if_amp(meta.url)
                     if meta.is_amp:
                         meta.is_cached = check_if_cached(meta.url)
