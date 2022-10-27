@@ -2,8 +2,6 @@ from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from helpers.db.dals.entry_dal import EntryDal
 import helpers.helper as helper
-from typing import Optional, List
-from helpers.model import Link
 from helpers.db.config import engine, Base
 from dependencies import get_entry_dal
 
@@ -33,7 +31,7 @@ class Msg(BaseModel):
     msg: str
 
 
-@app.post("/", response_model=Optional[List[Link]])
+@app.post("/")
 async def root(inp: Msg, entry_dal: EntryDal = Depends(get_entry_dal)):
     body = inp.msg
     if helper.check_if_amp(body):
