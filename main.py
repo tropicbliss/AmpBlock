@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import helpers.helper as helper
+from helpers.database import save_entry
+from helpers.database import database
+from typing import Optional, List
+from helpers.model import Link
 
 description = """
 AmpBlock is an API that extracts AMP links from messages and retrieves each of their canonical URLs.
@@ -28,7 +32,7 @@ class Msg(BaseModel):
     msg: str
 
 
-@app.post("/")
+@app.post("/", response_model=Optional[List[Link]])
 async def root(inp: Msg):
     body = inp.msg
     if helper.check_if_amp(body):
@@ -36,4 +40,15 @@ async def root(inp: Msg):
         links = await helper.get_urls_info(urls)
         if any(link.canonical for link in links) or any(link.amp_canonical for link in links):
             return [link.__dict__ for link in links]
+        await save_entry(True, links)
     return None
+
+
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()

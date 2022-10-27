@@ -39,6 +39,7 @@ class CanonicalType(enum.Enum):
     TCO_PAGETITLE = "tco_pagetitle"
     META_REDIRECT = "meta_redirect"
     GUESS_AND_CHECK = "guess_and_check"
+    DATABASE = "database"
 
 
 class Page:

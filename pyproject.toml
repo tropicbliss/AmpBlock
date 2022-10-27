@@ -16,6 +16,7 @@ beautifulsoup4 = "^4.11.1"
 newspaper3k = "^0.2.8"
 aiohttp = "^3.8.3"
 aiodns = "^3.0.0"
+databases = {extras = ["aiomysql"], version = "^0.6.1"}
 
 [tool.poetry.dev-dependencies]
 

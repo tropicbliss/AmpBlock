@@ -12,6 +12,7 @@ import re
 from newspaper import ArticleException, Article
 from difflib import SequenceMatcher
 import aiohttp
+from helpers.database import get_entry_by_original_url
 
 
 # Get and save all the info on the URLs as a Link instance
@@ -64,7 +65,7 @@ def check_if_cached(url) -> bool:
 
 
 # Get the canonical of the URL
-async def get_canonicals(link: Link, max_depth=static.MAX_DEPTH, use_gac=True, use_mr=True) -> Link:
+async def get_canonicals(link: Link, max_depth=static.MAX_DEPTH, use_db=True, use_gac=True, use_mr=True) -> Link:
     next_url = link.origin.url
     depth = 0
     while depth < max_depth:
@@ -82,6 +83,7 @@ async def get_canonicals(link: Link, max_depth=static.MAX_DEPTH, use_gac=True, u
                 url=next_url,
                 meta=canonical,
                 original_url=link.origin.url,
+                use_db=use_db,
                 use_gac=use_gac,
                 use_mr=use_mr,
             )
@@ -160,7 +162,7 @@ def get_randomized_headers() -> Dict[str, str]:
 
 
 # Try to find the canonical url by scanning for the specified tag
-async def get_canonical_with_soup(r, url, meta: Canonical, original_url,
+async def get_canonical_with_soup(r, url, meta: Canonical, original_url, use_db=False,
                                   use_gac=False, use_mr=False) -> Optional[Canonical]:
     can_urls = None
     # Find canonical urls with method rel
@@ -217,6 +219,12 @@ async def get_canonical_with_soup(r, url, meta: Canonical, original_url,
             guessed_and_checked_url = await get_can_url_with_guess_and_check(url)
             if guessed_and_checked_url:
                 can_urls = [guessed_and_checked_url]
+    # Find canonical urls by checking the database
+    elif meta.type == CanonicalType.DATABASE:
+        if use_db:
+            entry = await get_entry_by_original_url(url)
+            if entry and entry.canonical_url:
+                can_urls = [entry.canonical_url]
     # Catch unknown canonical methods
     else:
         return None
