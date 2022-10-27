@@ -23,3 +23,4 @@ aiohttp==3.8.3
 aiodns==3.0.0
 databases==0.6.1
 aiomysql==0.6.1
+mysql-connector-python==8.0.31
