@@ -29,5 +29,5 @@ def get_urls(body: str) -> List[str]:
 
 
 # Loop through all the URLs, run get_url_info for each url, append Link instance to links
-async def get_urls_info(urls: List[str], entry_dal) -> List[Link]:
-    return await asyncio.gather(*[get_url_info(url, False, static.MAX_DEPTH, entry_dal=entry_dal) for url in urls])
+async def get_urls_info(urls: List[str]) -> List[Link]:
+    return await asyncio.gather(*[get_url_info(url, False, static.MAX_DEPTH) for url in urls])
