@@ -19,5 +19,5 @@ class EntryDal:
         return
 
     async def get_entry_by_original_url(self, original_url):
-        q = await self.db_session.execute(select(Entry).where(Entry.original_url == original_url).where(Entry.canonical_url != None).order_by(desc(Entry.entry_id)).first())
+        q = await self.db_session.execute(select(Entry).where(Entry.original_url == original_url).where(Entry.canonical_url != None).order_by(desc(Entry.entry_id)).limit(1).all())
         return q.scalars().first()
