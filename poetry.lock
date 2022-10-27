@@ -30,21 +30,6 @@ yarl = ">=1.0,<2.0"
 speedups = ["Brotli", "aiodns", "cchardet"]
 
 [[package]]
-name = "aiomysql"
-version = "0.1.1"
-description = "MySQL driver for asyncio."
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-PyMySQL = ">=1.0"
-
-[package.extras]
-rsa = ["PyMySQL[rsa] (>=1.0)"]
-sa = ["sqlalchemy (>=1.0,<1.4)"]
-
-[[package]]
 name = "aiosignal"
 version = "1.2.0"
 description = "aiosignal: a list of registered asynchronous callbacks"
@@ -94,6 +79,14 @@ description = "Timeout context manager for asyncio programs"
 category = "main"
 optional = false
 python-versions = ">=3.6"
+
+[[package]]
+name = "asyncmy"
+version = "0.2.5"
+description = "A fast asyncio MySQL driver"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
 
 [[package]]
 name = "attrs"
@@ -506,18 +499,6 @@ spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
 
 [[package]]
-name = "pymysql"
-version = "1.0.2"
-description = "Pure Python MySQL Driver"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.extras]
-ed25519 = ["PyNaCl (>=1.4.0)"]
-rsa = ["cryptography"]
-
-[[package]]
 name = "python-dateutil"
 version = "2.8.2"
 description = "Extensions to the standard Python datetime module"
@@ -810,7 +791,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "58438e904de8e8cc8cf0b9c5ae221e3a146a9d073038ad6eb2acfd60f6bd1ffe"
+content-hash = "8b4b799024002c777b8ea134ada40883f076cc15a5293749b054f82a05481fbc"
 
 [metadata.files]
 aiodns = [
@@ -906,10 +887,6 @@ aiohttp = [
     {file = "aiohttp-3.8.3-cp39-cp39-win_amd64.whl", hash = "sha256:88e5be56c231981428f4f506c68b6a46fa25c4123a2e86d156c58a8369d31ab7"},
     {file = "aiohttp-3.8.3.tar.gz", hash = "sha256:3828fb41b7203176b82fe5d699e0d845435f2374750a44b480ea6b930f6be269"},
 ]
-aiomysql = [
-    {file = "aiomysql-0.1.1-py3-none-any.whl", hash = "sha256:b66fa1481ca71c5ee0d933ec3abf51f6136543a3710ba80b134eb33da7ed6f13"},
-    {file = "aiomysql-0.1.1.tar.gz", hash = "sha256:0d686c4fdae6b67d1825d8be60fa3b0e644fca2c84d3c936d850fc259c8e107e"},
-]
 aiosignal = [
     {file = "aiosignal-1.2.0-py3-none-any.whl", hash = "sha256:26e62109036cd181df6e6ad646f91f0dcfd05fe16d0cb924138ff2ab75d64e3a"},
     {file = "aiosignal-1.2.0.tar.gz", hash = "sha256:78ed67db6c7b7ced4f98e495e572106d5c432a93e1ddd1bf475e1dc05f5b7df2"},
@@ -925,6 +902,21 @@ astroid = [
 async-timeout = [
     {file = "async-timeout-4.0.2.tar.gz", hash = "sha256:2163e1640ddb52b7a8c80d0a67a08587e5d245cc9c553a74a847056bc2976b15"},
     {file = "async_timeout-4.0.2-py3-none-any.whl", hash = "sha256:8ca1e4fcf50d07413d66d1a5e416e42cfdf5851c981d679a09851a6853383b3c"},
+]
+asyncmy = [
+    {file = "asyncmy-0.2.5-cp310-cp310-macosx_10_16_x86_64.whl", hash = "sha256:f176b55c82d3bdb10f0ecb3a518a54777f3d247e00f06add138f63df4edc0e3d"},
+    {file = "asyncmy-0.2.5-cp310-cp310-manylinux_2_31_x86_64.whl", hash = "sha256:f404d351d4f9fc741cdb8b49da8278e63a8551be6ccd03b514c2c0828500633d"},
+    {file = "asyncmy-0.2.5-cp310-cp310-win_amd64.whl", hash = "sha256:9824184d180753d23101b1d9fdc7955783b08fbc6f3cc88d6acce7ff019c0eaf"},
+    {file = "asyncmy-0.2.5-cp37-cp37m-macosx_10_16_x86_64.whl", hash = "sha256:02add8063bd00762a469dcb9915563f66520ffda598851a957443b1012182f43"},
+    {file = "asyncmy-0.2.5-cp37-cp37m-manylinux_2_31_x86_64.whl", hash = "sha256:a341d8a22d9a1f3236a81f17836002291567aa7d878ab75b37ed9bf4ce401290"},
+    {file = "asyncmy-0.2.5-cp37-cp37m-win_amd64.whl", hash = "sha256:2dc25f0bb723a71445d5c5b46ab2ae71c9dd3123fea9eae1bee4c36af5eda2bc"},
+    {file = "asyncmy-0.2.5-cp38-cp38-macosx_10_16_x86_64.whl", hash = "sha256:e184e701fa153dd456f6b351136c0a7a7524b8f5959f7f4b47848efe434a9c7d"},
+    {file = "asyncmy-0.2.5-cp38-cp38-manylinux_2_31_x86_64.whl", hash = "sha256:2275cc0036fa39f888c0770173ffb8ed16b89eecf2e380499275bfa6bf4ee088"},
+    {file = "asyncmy-0.2.5-cp38-cp38-win_amd64.whl", hash = "sha256:527ccc24a9bd76d565f1024f4a50ee6fd92cac518e6d884281ad61ffc424e7cd"},
+    {file = "asyncmy-0.2.5-cp39-cp39-macosx_10_16_x86_64.whl", hash = "sha256:6606e296dc161d71629f1163c3c82dda97431e25ee7240b6b7f139c2c35cff94"},
+    {file = "asyncmy-0.2.5-cp39-cp39-manylinux_2_31_x86_64.whl", hash = "sha256:61ed1b9e69dafe476f02c20962b8ee4ec5ba130b760bdf504015fcb80bbe6787"},
+    {file = "asyncmy-0.2.5-cp39-cp39-win_amd64.whl", hash = "sha256:f5dcc1a29d608cc5270f37328253032c554321b85bcf5653f1affa01f185c29c"},
+    {file = "asyncmy-0.2.5.tar.gz", hash = "sha256:cf3ef3d1ada385d231f23fffcbf1fe040bae8575b187746633fbef6e7cff2844"},
 ]
 attrs = [
     {file = "attrs-22.1.0-py2.py3-none-any.whl", hash = "sha256:86efa402f67bf2df34f51a335487cf46b1ec130d02b8d39fd248abfd30da551c"},
@@ -1543,10 +1535,6 @@ pydantic = [
 pylint = [
     {file = "pylint-2.15.5-py3-none-any.whl", hash = "sha256:c2108037eb074334d9e874dc3c783752cc03d0796c88c9a9af282d0f161a1004"},
     {file = "pylint-2.15.5.tar.gz", hash = "sha256:3b120505e5af1d06a5ad76b55d8660d44bf0f2fc3c59c2bdd94e39188ee3a4df"},
-]
-pymysql = [
-    {file = "PyMySQL-1.0.2-py3-none-any.whl", hash = "sha256:41fc3a0c5013d5f039639442321185532e3e2c8924687abe6537de157d403641"},
-    {file = "PyMySQL-1.0.2.tar.gz", hash = "sha256:816927a350f38d56072aeca5dfb10221fe1dc653745853d30a216637f5d7ad36"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
