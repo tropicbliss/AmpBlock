@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import declarative_base, sessionmaker
 import helpers.static as static
 
-DATABASE_URL = "mysql+mysqlconnector://{username}:{password}@" \
+DATABASE_URL = "mysql+aiosqlite://{username}:{password}@" \
     "{hostname}/{databasename}".format(
         username=static.DB_USERNAME,
         password=static.DB_PASSWORD,
