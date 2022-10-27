@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "railway-fastapi-template"
+name = "AmpBlock"
 version = "0.1.0"
-description = "This example starts up a FastAPI server"
-authors = ["DeviousLab <deviouslab@gmail.com>"]
-license = "MIT"
+description = "Self hostable web API that detects AMP links"
+authors = ["tropicbliss <tropicbliss@protonmail.com>"]
+license = "GPL-3.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
