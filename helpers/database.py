@@ -29,8 +29,7 @@ entry = sqlalchemy.Table(
     sqlalchemy.Column("original_url", sqlalchemy.VARCHAR(4000)),
     sqlalchemy.Column("canonical_url", VARCHAR(4000))
 )
-engine = sqlalchemy.create_engine(DATABASE_URL, connect_args={
-                                  "check_same_thread": False})
+engine = sqlalchemy.create_engine(DATABASE_URL)
 metadata.create_all(engine)
 
 
