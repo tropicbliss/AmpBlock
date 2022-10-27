@@ -12,11 +12,10 @@ import re
 from newspaper import ArticleException, Article
 from difflib import SequenceMatcher
 import aiohttp
-from helpers.database import get_entry_by_original_url
 
 
 # Get and save all the info on the URLs as a Link instance
-async def get_url_info(url, use_gac, max_depth) -> Link:
+async def get_url_info(url, use_gac, max_depth, entry_dal) -> Link:
     link = Link(canonicals=[])
     origin = UrlMeta(url=remove_markdown(url))
     origin.is_valid = check_if_valid_url(origin.url)
@@ -30,6 +29,7 @@ async def get_url_info(url, use_gac, max_depth) -> Link:
             link.origin = origin
             link = await get_canonicals(
                 link=link,
+                entry_dal=entry_dal
                 max_depth=max_depth,
                 use_gac=use_gac
             )
@@ -65,7 +65,7 @@ def check_if_cached(url) -> bool:
 
 
 # Get the canonical of the URL
-async def get_canonicals(link: Link, max_depth=static.MAX_DEPTH, use_db=True, use_gac=True, use_mr=True) -> Link:
+async def get_canonicals(link: Link, entry_dal, max_depth=static.MAX_DEPTH, use_db=True, use_gac=True, use_mr=True) -> Link:
     next_url = link.origin.url
     depth = 0
     while depth < max_depth:
@@ -81,6 +81,7 @@ async def get_canonicals(link: Link, max_depth=static.MAX_DEPTH, use_db=True, us
             canonical = await get_canonical_with_soup(
                 r=response,
                 url=next_url,
+                entry_dal=entry_dal
                 meta=canonical,
                 original_url=link.origin.url,
                 use_db=use_db,
@@ -162,7 +163,7 @@ def get_randomized_headers() -> Dict[str, str]:
 
 
 # Try to find the canonical url by scanning for the specified tag
-async def get_canonical_with_soup(r, url, meta: Canonical, original_url, use_db=False,
+async def get_canonical_with_soup(r, url, entry_dal, meta: Canonical, original_url, use_db=False,
                                   use_gac=False, use_mr=False) -> Optional[Canonical]:
     can_urls = None
     # Find canonical urls with method rel
@@ -222,7 +223,7 @@ async def get_canonical_with_soup(r, url, meta: Canonical, original_url, use_db=
     # Find canonical urls by checking the database
     elif meta.type == CanonicalType.DATABASE:
         if use_db:
-            entry = await get_entry_by_original_url(url)
+            entry = await entry_dal.get_entry_by_original_url(url)
             if entry and entry.canonical_url:
                 can_urls = [entry.canonical_url]
     # Catch unknown canonical methods

@@ -21,6 +21,5 @@ beautifulsoup4==4.11.1
 newspaper3k==0.2.8
 aiohttp==3.8.3
 aiodns==3.0.0
-databases==0.6.1
+sqlalchemy==1.4.42
 aiomysql==0.1.1
-mysql-connector-python==8.0.31

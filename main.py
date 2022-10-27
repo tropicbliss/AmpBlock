@@ -1,10 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
+from helpers.db.dals.entry_dal import EntryDal
 import helpers.helper as helper
-from helpers.database import save_entry
-from helpers.database import database
 from typing import Optional, List
 from helpers.model import Link
+from helpers.db.config import engine, Base
+from dependencies import get_entry_dal
 
 description = """
 AmpBlock is an API that extracts AMP links from messages and retrieves each of their canonical URLs.
@@ -33,22 +34,19 @@ class Msg(BaseModel):
 
 
 @app.post("/", response_model=Optional[List[Link]])
-async def root(inp: Msg):
+async def root(inp: Msg, entry_dal: EntryDal = Depends(get_entry_dal)):
     body = inp.msg
     if helper.check_if_amp(body):
         urls = helper.get_urls(body)
-        links = await helper.get_urls_info(urls)
+        links = await helper.get_urls_info(urls, entry_dal)
         if any(link.canonical for link in links) or any(link.amp_canonical for link in links):
             return [link.__dict__ for link in links]
-        await save_entry(True, links)
+        await entry_dal.save_entry(True, links)
     return None
 
 
 @app.on_event("startup")
 async def startup():
-    await database.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.drop_all)
+        await conn.run_sync(Base.metadata.create_all)
