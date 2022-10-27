@@ -29,7 +29,7 @@ async def get_url_info(url, use_gac, max_depth, entry_dal) -> Link:
             link.origin = origin
             link = await get_canonicals(
                 link=link,
-                entry_dal=entry_dal
+                entry_dal=entry_dal,
                 max_depth=max_depth,
                 use_gac=use_gac
             )
@@ -81,7 +81,7 @@ async def get_canonicals(link: Link, entry_dal, max_depth=static.MAX_DEPTH, use_
             canonical = await get_canonical_with_soup(
                 r=response,
                 url=next_url,
-                entry_dal=entry_dal
+                entry_dal=entry_dal,
                 meta=canonical,
                 original_url=link.origin.url,
                 use_db=use_db,
