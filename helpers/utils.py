@@ -161,7 +161,7 @@ def get_randomized_headers() -> Dict[str, str]:
 
 
 # Try to find the canonical url by scanning for the specified tag
-@alru_cache(maxsize=32)
+@alru_cache()
 async def get_canonical_with_soup(r, url, meta: Canonical, original_url,
                                   use_gac=False, use_mr=False) -> Optional[Canonical]:
     can_urls = None
