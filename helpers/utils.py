@@ -2,7 +2,7 @@ from helpers.model import Link
 import helpers.static as static
 from helpers.model import UrlMeta, CanonicalType, Canonical, Page
 import validators
-from validators import ValidationFailure
+from validators import ValidationError
 import tldextract
 from bs4 import BeautifulSoup
 from typing import Optional, Dict, List
@@ -51,7 +51,7 @@ def remove_markdown(url) -> str:
 def check_if_valid_url(url) -> bool:
     try:
         return validators.url(url)
-    except (ValidationFailure, Exception):
+    except (ValidationError, Exception):
         return False
 
 
