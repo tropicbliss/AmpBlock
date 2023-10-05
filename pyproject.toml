@@ -7,16 +7,16 @@ license = "GPL-3.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.100.0"
-uvicorn = "^0.23.1"
+fastapi = "^0.103.2"
+uvicorn = "^0.23.2"
 urlextract = "^1.8.0"
-validators = "^0.20.0"
-tldextract = "^3.4.4"
+validators = "^0.22.0"
+tldextract = "^3.6.0"
 beautifulsoup4 = "^4.12.2"
 newspaper3k = "^0.2.8"
-aiohttp = "^3.8.4"
+aiohttp = "^3.8.5"
 aiodns = "^3.0.0"
-async-lru = "^2.0.3"
+async-lru = "^2.0.4"
 
 [tool.poetry.dev-dependencies]
 
