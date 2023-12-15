@@ -7,22 +7,23 @@ license = "GPL-3.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-fastapi = "^0.103.2"
-uvicorn = "^0.23.2"
+fastapi = "^0.105.0"
+uvicorn = "^0.24.0.post1"
 urlextract = "^1.8.0"
 validators = "^0.22.0"
-tldextract = "^3.6.0"
+tldextract = "^5.1.1"
 beautifulsoup4 = "^4.12.2"
-newspaper3k = "^0.2.8"
-aiohttp = "^3.8.5"
-aiodns = "^3.0.0"
+newspaper4k = "^0.9.1"
+aiohttp = "^3.9.1"
+aiodns = "^3.1.1"
 async-lru = "^2.0.4"
+email-validator = "^2.1.0.post1"
 
 [tool.poetry.dev-dependencies]
 
 [tool.poetry.group.dev.dependencies]
-autopep8 = "^2.0.2"
-pylint = "^2.17.4"
+autopep8 = "^2.0.4"
+pylint = "^3.0.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

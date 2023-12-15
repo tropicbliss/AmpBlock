@@ -117,6 +117,8 @@ The response data model mirrors the response data model specified in the officia
 ```
 
 This would be the final iteration of this API. For updated code, refer to [AmputatorBot](https://github.com/KilledMufasa/AmputatorBot) which is the project in which AmpBlock is based on.
+
+[Link to repository](https://github.com/tropicbliss/AmpBlock)
 """
 
 app = FastAPI(
@@ -130,18 +132,18 @@ app = FastAPI(
     },
     license_info={
         "name": "GNU GPL v3.0",
-        "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
-    }
+        "url": "https://www.gnu.org/licenses/gpl-3.0-standalone.html",
+    },
 )
 
 
 class Msg(BaseModel):
-    msg: str
+    url: str
 
 
 @app.post("/")
 async def root(inp: Msg):
-    body = inp.msg
+    body = inp.url
     if helper.check_if_amp(body):
         urls = helper.get_urls(body)
         links = await helper.get_urls_info(urls)
